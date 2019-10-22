@@ -12,7 +12,6 @@ public class Attack : MonoBehaviour
 
     public void MeleeWeaponAttack(GameObject target)
     {
-        // currently uses your score instead of your modifier 
         if (target.GetComponent<Creature>().ac <= Random.Dice("1d20") + ScoreFromWeapon(gameObject.GetComponent<Creature>().equippedWeapon)) // also add proficiency if you are proficient in the weapon
         {
             Debug.Log("Attack hit");
@@ -30,22 +29,22 @@ public class Attack : MonoBehaviour
 
         if (weapon.attribute == "strength")
         {
-            value = gameObject.GetComponent<Creature>().strength;
+            value = (gameObject.GetComponent<Creature>().strength - 10) / 2;
         }
         else if (weapon.attribute == "dexterity")
         {
-            value = gameObject.GetComponent<Creature>().dexterity;
+            value = (gameObject.GetComponent<Creature>().dexterity - 10) / 2;
 
         }
         else if (weapon.attribute == "finesse")
         {
             if (gameObject.GetComponent<Creature>().dexterity > gameObject.GetComponent<Creature>().strength)
             {
-                value = gameObject.GetComponent<Creature>().dexterity;
+                value = (gameObject.GetComponent<Creature>().dexterity - 10) / 2;
             }
             else
             {
-                value = gameObject.GetComponent<Creature>().strength;
+                value = (gameObject.GetComponent<Creature>().strength - 10 ) / 2;
             }
         }
         return value;
